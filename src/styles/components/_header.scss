@@ -1,21 +1,22 @@
 .header_container {
+  margin-bottom: 50px;
   nav {
     position: absolute;
     top: 25px;
     left: 16px;
   }
 
-  ul{
-    display:flex;
+  ul {
+    display: flex;
   }
 
-  li{
-    font-size:18px
+  li {
+    font-size: 18px;
   }
 
   a {
     text-decoration: none;
-    background-color:$color-3;
+    background-color: $color-3;
     color: $black;
     border-radius: 10px;
     width: 110px;
@@ -24,12 +25,12 @@
 
     &:hover {
       background-color: $black;
-      color:$color-3
+      color: $color-3;
     }
   }
 
   .nav-active {
     background-color: $black;
-    color:$color-3
+    color: $color-3;
   }
 }
