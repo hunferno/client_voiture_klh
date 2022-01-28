@@ -1,0 +1,35 @@
+.header_container {
+  nav {
+    position: absolute;
+    top: 25px;
+    left: 16px;
+  }
+
+  ul{
+    display:flex;
+  }
+
+  li{
+    font-size:18px
+  }
+
+  a {
+    text-decoration: none;
+    background-color:$color-3;
+    color: $black;
+    border-radius: 10px;
+    width: 110px;
+    text-align: center;
+    margin-right: 5px;
+
+    &:hover {
+      background-color: $black;
+      color:$color-3
+    }
+  }
+
+  .nav-active {
+    background-color: $black;
+    color:$color-3
+  }
+}
