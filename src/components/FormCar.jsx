@@ -72,7 +72,7 @@ const FormCar = ({ handleSubmit }) => {
         </Form.Group>
 
         <Form.Group className="mb-2" controlId="formBasicEmail">
-          <Form.Label>Nombre de kilometre de la voiture (en km)</Form.Label>
+          <Form.Label>Nombre de kilometre de la voiture</Form.Label>
           <Form.Control
             onChange={(e) => setNbrKilometre(e.target.value)}
             type="number"
