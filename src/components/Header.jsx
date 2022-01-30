@@ -11,7 +11,7 @@ const Header = () => {
           </NavLink>
 
           <NavLink
-            to={"/add-cart"}
+            to={"/add-car"}
             className={(nav) => nav.isActive && "nav-active"}
           >
             <li>Ajouter une voiture</li>
