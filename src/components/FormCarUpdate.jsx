@@ -1,8 +1,12 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Button, Container, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
-const FormCarUpdate = ({ handleSubmit, car }) => {
-  //DEFINITION DES VARIABLES A ENVOYER EN BASE
+const FormCarUpdate = ({ id }) => {
+  const navigate = useNavigate();
+
+  //VOITURE VENANT DE LA BASE
   const [marque, setMarque] = useState("");
   const [vitesse, setVitesse] = useState(0);
   const [image, setImage] = useState("");
@@ -12,20 +16,25 @@ const FormCarUpdate = ({ handleSubmit, car }) => {
   const [boiteVitesse, setBoiteVitesse] = useState("");
   const [couleur, setCouleur] = useState("");
 
+  //RECUPERATION DE LA DATA
   useEffect(() => {
-    setMarque(car.marque);
-    setVitesse(car.vitesse);
-    setImage(car.image);
-    setCarburant(car.carburant);
-    setNbrKilometre(car.kilometrage);
-    setNbrPorte(car.nbrPorte);
-    setBoiteVitesse(car.boiteDeVitesse);
-    setCouleur(car.couleur);
+    axios
+      .get(`http://localhost:8000/voiture/afficher_la_voiture/${id}`)
+      .then((res) => {
+        setMarque(res.data.marque);
+        setVitesse(res.data.vitesse);
+        setImage(res.data.image);
+        setCarburant(res.data.carburant);
+        setNbrKilometre(res.data.kilometrage);
+        setNbrPorte(res.data.nbrPorte);
+        setBoiteVitesse(res.data.boiteDeVitesse);
+        setCouleur(res.data.couleur);
+      });
   }, []);
 
   //CREATION D'UN OBJET VOITURE
   const voiture = {
-    marque: marque,
+    marque,
     vitesse: Number(vitesse),
     image: image
       ? image
@@ -37,18 +46,21 @@ const FormCarUpdate = ({ handleSubmit, car }) => {
     couleur: couleur ? couleur : null,
   };
 
-  // const handleTest = (e) => {
-  //   e.preventDefault();
-  //   console.log(voiture);
-  // };
+  //FONCTION POUR LA CREATION D'UNE VOITURE
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post(
+        `http://localhost:8000/voiture/modifier_la_voiture/${id}`,
+        JSON.stringify(voiture)
+      )
+      .then((res) => console.log(res))
+      .then(() => navigate("/"));
+  };
 
   return (
     <Container className="form-container">
-      <Form
-        className="d-flex flex-column"
-        onSubmit={(e) => handleSubmit(e, voiture)}
-        // onSubmit={(e) => handleTest(e)}
-      >
+      <Form className="d-flex flex-column" onSubmit={(e) => handleSubmit(e)}>
         <Form.Group className="mb-2" controlId="formBasicEmail">
           <Form.Label>Marque de la voiture *</Form.Label>
           <Form.Control
